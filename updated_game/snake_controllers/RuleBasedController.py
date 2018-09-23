@@ -12,7 +12,7 @@ class RuleBasedController:
             current_snake_direction = snake.getCurrentDirection()
 
             # if the food is to the left of the snake
-            if food.x < snake.x[0]:
+            if food.x < snake.x[0] and current_snake_direction != constants.RIGHT:
                 snake.moveLeft()
             # if food is to the right of the snake
             elif food.x > snake.x[0] and current_snake_direction != constants.LEFT:
@@ -24,7 +24,7 @@ class RuleBasedController:
                 if food.y < snake.y[0] and current_snake_direction != constants.DOWN:
                     snake.moveUp()
                 # snake is higher than the food
-                elif food.y > snake.y[0]:
+                elif food.y > snake.y[0] and current_snake_direction != constants.UP:
                     snake.moveDown()
             
             self.current_move_number += 1
