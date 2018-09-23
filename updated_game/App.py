@@ -6,6 +6,7 @@ import time
 from Game import Game
 from Food import Food
 from Snake import Snake
+from Bricks import Bricks
 
 class App:
  
@@ -19,9 +20,11 @@ class App:
         self._display_surf = None
         self._image_surf = None
         self._food_surf = None
+        self._brick_image = None
         self.game = Game()
         self.snake = Snake(3) 
         self.food = Food(5,5)
+        self.bricks = Bricks(10, 10)
  
     def on_init(self):
         pygame.init()
@@ -31,6 +34,7 @@ class App:
         self._running = True
         self._image_surf = pygame.image.load("assets/snake.png").convert()
         self._food_surf = pygame.image.load("assets/food.png").convert()
+        self._brick_image = pygame.image.load("assets/brick.png").convert()
  
     def on_event(self, event):
         if event.type == QUIT:
@@ -61,6 +65,7 @@ class App:
         self._display_surf.fill((0,0,0))
         self.snake.draw(self._display_surf, self._image_surf)
         self.food.draw(self._display_surf, self._food_surf)
+        self.bricks.draw(self._display_surf, self._brick_image)
         pygame.display.flip()
  
     def on_cleanup(self):
