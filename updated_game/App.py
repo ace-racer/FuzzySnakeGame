@@ -7,13 +7,14 @@ from Game import Game
 from Food import Food
 from Snake import Snake
 from Bricks import Bricks
+from Logger import Logger
 
 # import different controllers
 from snake_controllers.FuzzyRulesController import FuzzyRulesController
 from snake_controllers.ManualController import ManualController
 from snake_controllers.RuleBasedController import RuleBasedController
 
-class App:
+class App(Logger):
  
     windowWidth = 800
     windowHeight = 600
@@ -21,6 +22,7 @@ class App:
     food = 0
  
     def __init__(self):
+        Logger.__init__(self)
         self._running = True
         self._display_surf = None
         self._image_surf = None
@@ -94,12 +96,13 @@ class App:
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
- 
+        self.start_logging_new_game()
+
         while( self._running ):
             pygame.event.pump()
 
             self.snake, should_continue_running = self.snake_controller.perform_next_move(self.snake, self.food, self.bricks)
-            
+            self.add_snake_move(self.snake.getCurrentDirection())
             self._running = should_continue_running
             self.on_loop()
             self.on_render()
