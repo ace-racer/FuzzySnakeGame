@@ -1,4 +1,5 @@
 from pygame.locals import *
+import constants
 
 class Snake:
     x = [0]
@@ -34,23 +35,23 @@ class Snake:
                 self.y[i] = self.y[i-1]
  
             # update position of head of snake
-            if self.direction == 0:
+            if self.direction == constants.RIGHT:
                 if self.x[0] + self.step >= self._window_width:
                     self.x[0] = 0
                 else:
                     self.x[0] = self.x[0] + self.step
-            if self.direction == 1:
+            if self.direction == constants.LEFT:
                 if self.x[0] - self.step <= 0:
                     self.x[0] = self._window_width - self.step
                 else:
                     self.x[0] = self.x[0] - self.step
-            if self.direction == 2:
+            if self.direction == constants.UP:
                 if self.y[0] - self.step <= 0:
                     self.y[0] = self._window_height - self.step
                 else:
                     self.y[0] = self.y[0] - self.step
 
-            if self.direction == 3:
+            if self.direction == constants.DOWN:
                 if self.y[0] + self.step >= self._window_height:
                     self.y[0] = 0
                 else:
@@ -60,16 +61,19 @@ class Snake:
  
  
     def moveRight(self):
-        self.direction = 0
+        self.direction = constants.RIGHT
  
     def moveLeft(self):
-        self.direction = 1
+        self.direction = constants.LEFT
  
     def moveUp(self):
-        self.direction = 2
+        self.direction = constants.UP
  
     def moveDown(self):
-        self.direction = 3 
+        self.direction = constants.DOWN
+
+    def getCurrentDirection(self):
+        return self.direction
  
     def draw(self, surface, image):
         for i in range(0,self.length):

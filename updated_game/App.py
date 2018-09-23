@@ -30,9 +30,10 @@ class App:
         self.snake = Snake(3, self.windowHeight, self.windowWidth) 
         self.food = Food(5,5)
         self.bricks = Bricks(10, 10)
+        self._score = 0
 
         # this needs to be updated as required
-        self.snake_controller = ManualController()
+        self.snake_controller = RuleBasedController()
  
     def on_init(self):
         pygame.init()
@@ -53,6 +54,9 @@ class App:
  
         # does snake eat food?
         if self.game.isCollision(self.food.x,self.food.y,self.snake.x[0], self.snake.y[0],44):
+            # add score of 1 for eating food
+            self._score += 1
+
             self.food.x = randint(2,9) * 44
             self.food.y = randint(2,9) * 44
             self.snake.length = self.snake.length + 1
@@ -64,6 +68,7 @@ class App:
                 print("You lose! Collision with snake: ")
                 print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.snake.x[i]) + "," + str(self.snake.y[i]) + ")")
+                print("Your score: {0}".format(self._score))
                 exit(0)
 
         # does snake collide with a brick?
@@ -71,6 +76,7 @@ class App:
             print("You lose! Collision with brick: ")
             print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
             print("x[" + str(i) + "] (" + str(self.bricks.x) + "," + str(self.bricks.y) + ")")
+            print("Your score: {0}".format(self._score))
             exit(0)
  
         pass
