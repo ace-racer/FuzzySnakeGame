@@ -8,6 +8,11 @@ from Food import Food
 from Snake import Snake
 from Bricks import Bricks
 
+# import different controllers
+from snake_controllers.FuzzyRulesController import FuzzyRulesController
+from snake_controllers.ManualController import ManualController
+from snake_controllers.RuleBasedController import RuleBasedController
+
 class App:
  
     windowWidth = 800
@@ -25,6 +30,9 @@ class App:
         self.snake = Snake(3, self.windowHeight, self.windowWidth) 
         self.food = Food(5,5)
         self.bricks = Bricks(10, 10)
+
+        # this needs to be updated as required
+        self.snake_controller = ManualController()
  
     def on_init(self):
         pygame.init()
@@ -83,23 +91,10 @@ class App:
  
         while( self._running ):
             pygame.event.pump()
-            keys = pygame.key.get_pressed() 
- 
-            if (keys[K_RIGHT]):
-                self.snake.moveRight()
- 
-            if (keys[K_LEFT]):
-                self.snake.moveLeft()
- 
-            if (keys[K_UP]):
-                self.snake.moveUp()
- 
-            if (keys[K_DOWN]):
-                self.snake.moveDown()
- 
-            if (keys[K_ESCAPE]):
-                self._running = False
- 
+
+            self.snake, should_continue_running = self.snake_controller.perform_next_move(self.snake, self.food, self.bricks)
+            
+            self._running = should_continue_running
             self.on_loop()
             self.on_render()
  
