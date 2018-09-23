@@ -44,20 +44,26 @@ class App:
         self.snake.update()
  
         # does snake eat food?
-        for i in range(0,self.snake.length):
-            if self.game.isCollision(self.food.x,self.food.y,self.snake.x[i], self.snake.y[i],44):
-                self.food.x = randint(2,9) * 44
-                self.food.y = randint(2,9) * 44
-                self.snake.length = self.snake.length + 1
+        if self.game.isCollision(self.food.x,self.food.y,self.snake.x[0], self.snake.y[0],44):
+            self.food.x = randint(2,9) * 44
+            self.food.y = randint(2,9) * 44
+            self.snake.length = self.snake.length + 1
  
  
         # does snake collide with itself?
         for i in range(2,self.snake.length):
             if self.game.isCollision(self.snake.x[0],self.snake.y[0],self.snake.x[i], self.snake.y[i],40):
-                print("You lose! Collision: ")
+                print("You lose! Collision with snake: ")
                 print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.snake.x[i]) + "," + str(self.snake.y[i]) + ")")
                 exit(0)
+
+        # does snake collide with a brick?
+        if self.game.isCollision(self.bricks.x,self.bricks.y, self.snake.x[0], self.snake.y[0], 40):
+            print("You lose! Collision with brick: ")
+            print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
+            print("x[" + str(i) + "] (" + str(self.bricks.x) + "," + str(self.bricks.y) + ")")
+            exit(0)
  
         pass
  
