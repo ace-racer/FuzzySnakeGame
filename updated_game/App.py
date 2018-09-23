@@ -22,7 +22,7 @@ class App:
         self._food_surf = None
         self._brick_image = None
         self.game = Game()
-        self.snake = Snake(3) 
+        self.snake = Snake(3, self.windowHeight, self.windowWidth) 
         self.food = Food(5,5)
         self.bricks = Bricks(10, 10)
  

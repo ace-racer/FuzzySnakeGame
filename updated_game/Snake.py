@@ -10,7 +10,7 @@ class Snake:
     updateCountMax = 2
     updateCount = 0
  
-    def __init__(self, length):
+    def __init__(self, length, window_height=600, window_width=800):
        self.length = length
        for i in range(0,2000):
            self.x.append(-100)
@@ -19,6 +19,9 @@ class Snake:
        # initial positions, no collision.
        self.x[1] = 1*44
        self.x[2] = 2*44
+
+       self._window_height = window_height
+       self._window_width = window_width
  
     def update(self):
  
@@ -32,13 +35,26 @@ class Snake:
  
             # update position of head of snake
             if self.direction == 0:
-                self.x[0] = self.x[0] + self.step
+                if self.x[0] + self.step >= self._window_width:
+                    self.x[0] = 0
+                else:
+                    self.x[0] = self.x[0] + self.step
             if self.direction == 1:
-                self.x[0] = self.x[0] - self.step
+                if self.x[0] - self.step <= 0:
+                    self.x[0] = self._window_width - self.step
+                else:
+                    self.x[0] = self.x[0] - self.step
             if self.direction == 2:
-                self.y[0] = self.y[0] - self.step
+                if self.y[0] - self.step <= 0:
+                    self.y[0] = self._window_height - self.step
+                else:
+                    self.y[0] = self.y[0] - self.step
+
             if self.direction == 3:
-                self.y[0] = self.y[0] + self.step
+                if self.y[0] + self.step >= self._window_height:
+                    self.y[0] = 0
+                else:
+                    self.y[0] = self.y[0] + self.step
  
             self.updateCount = 0
  
