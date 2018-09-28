@@ -9,7 +9,7 @@ class Logger:
         with open(self._snake_moves_log_location, "a") as fa:
             fa.write("New game" + "\n")
 
-    def add_snake_move(self, move_direction):
+    def log_snake_move(self, move_direction):
         move_direction_text = constants.move_direction_text_dict[move_direction]
         with open(self._snake_moves_log_location, "a") as fa:
             fa.write(move_direction_text + "\n")

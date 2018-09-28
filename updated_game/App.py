@@ -2,12 +2,15 @@ from pygame.locals import *
 from random import randint
 import pygame
 import time
+import sys
 
 from Game import Game
 from Food import Food
 from Snake import Snake
 from Bricks import Bricks
 from Logger import Logger
+
+import constants
 
 # import different controllers
 from snake_controllers.FuzzyRulesController import FuzzyRulesController
@@ -21,7 +24,7 @@ class App(Logger):
     snake = 0
     food = 0
  
-    def __init__(self):
+    def __init__(self, controller_type, brick_layout_type):
         Logger.__init__(self)
         self._running = True
         self._display_surf = None
@@ -31,11 +34,11 @@ class App(Logger):
         self.game = Game()
         self.snake = Snake(3, self.windowHeight, self.windowWidth) 
         self.food = Food(5,5)
-        self.bricks = Bricks(10, 10)
+        self.bricks = Bricks(10, 10, brick_layout_type)
         self._score = 0
 
         # this needs to be updated as required
-        self.snake_controller = RuleBasedController()
+        self.snake_controller = constants.controller_name_mapping[controller_type]()
  
     def on_init(self):
         pygame.init()
@@ -96,13 +99,13 @@ class App(Logger):
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
-        self.start_logging_new_game()
+        # self.start_logging_new_game()
 
         while( self._running ):
             pygame.event.pump()
 
             self.snake, should_continue_running = self.snake_controller.perform_next_move(self.snake, self.food, self.bricks)
-            self.add_snake_move(self.snake.getCurrentDirection())
+            # self.log_snake_move(self.snake.getCurrentDirection())
             self._running = should_continue_running
             self.on_loop()
             self.on_render()
@@ -111,5 +114,17 @@ class App(Logger):
         self.on_cleanup()
  
 if __name__ == "__main__" :
-    theApp = App()
+    if len(sys.argv) == 1:
+        print("Usage python App.py 0/1/2 [For controller type] 0/1/2 [For brick layout type]")
+    if len(sys.argv) >= 2:
+        controller_type = int(sys.argv[1])
+    else:
+        controller_type = constants.RULE_BASED
+    
+    if len(sys.argv) >= 3:
+        brick_layout_type = int(sys.argv[2])
+    else:
+        brick_layout_type = 0
+    
+    theApp = App(controller_type, brick_layout_type)
     theApp.on_execute()
