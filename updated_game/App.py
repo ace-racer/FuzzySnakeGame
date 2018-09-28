@@ -1,5 +1,5 @@
 from pygame.locals import *
-from random import randint
+
 import pygame
 import time
 import sys
@@ -33,8 +33,9 @@ class App(Logger):
         self._brick_image = None
         self.game = Game()
         self.snake = Snake(3, self.windowHeight, self.windowWidth) 
-        self.food = Food(5,5)
         self.bricks = Bricks(5, 5, brick_layout_type)
+        self.food = Food()
+        self.food.generate_food(self.snake, self.bricks)
         self._score = 0
 
         # this needs to be updated as required
@@ -62,8 +63,7 @@ class App(Logger):
             # add score of 1 for eating food
             self._score += 1
 
-            self.food.x = randint(2,9) * 44
-            self.food.y = randint(2,9) * 44
+            self.food.generate_food(self.snake, self.bricks)
             self.snake.length = self.snake.length + 1
  
  
