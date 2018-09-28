@@ -34,7 +34,7 @@ class App(Logger):
         self.game = Game()
         self.snake = Snake(3, self.windowHeight, self.windowWidth) 
         self.food = Food(5,5)
-        self.bricks = Bricks(10, 10, brick_layout_type)
+        self.bricks = Bricks(5, 5, brick_layout_type)
         self._score = 0
 
         # this needs to be updated as required
@@ -77,12 +77,13 @@ class App(Logger):
                 exit(0)
 
         # does snake collide with a brick?
-        if self.game.isCollision(self.bricks.x,self.bricks.y, self.snake.x[0], self.snake.y[0], 40):
-            print("You lose! Collision with brick: ")
-            print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
-            print("x[" + str(i) + "] (" + str(self.bricks.x) + "," + str(self.bricks.y) + ")")
-            print("Your score: {0}".format(self._score))
-            exit(0)
+        for i in range(self.bricks.getNumBricks()):
+            if self.game.isCollision(self.bricks.x[i],self.bricks.y[i], self.snake.x[0], self.snake.y[0], 40):
+                print("You lose! Collision with brick: ")
+                print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
+                print("x[" + str(i) + "] (" + str(self.bricks.x[i]) + "," + str(self.bricks.y[i]) + ")")
+                print("Your score: {0}".format(self._score))
+                exit(0)
  
         pass
  
@@ -115,7 +116,7 @@ class App(Logger):
  
 if __name__ == "__main__" :
     if len(sys.argv) == 1:
-        print("Usage python App.py 0/1/2 [For controller type] 0/1/2 [For brick layout type]")
+        print("Usage python App.py 0 (Manual)/1(Rule)/2(Fuzzy) [For controller type] 0/1/2 [For brick layout type]")
     if len(sys.argv) >= 2:
         controller_type = int(sys.argv[1])
     else:
