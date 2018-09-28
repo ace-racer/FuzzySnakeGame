@@ -15,6 +15,8 @@ class Food:
     def generate_food(self, snake, bricks):
         self.x = randint(2,9) * self.step
         self.y = randint(2,9) * self.step
+
+        print("X={0} Y={1}".format(self.x, self.y))
         
         # generate a new food point if it overlaps with one of the brick's position
         for i in range(bricks.getNumBricks()):
