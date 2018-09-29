@@ -6,6 +6,7 @@ class RuleBasedController:
         self.max_moves = max_moves
         self.current_move_number = 0
         self.game = Game()
+        self._MAX = 9999999999
 
     def perform_next_move(self, snake, food, bricks):
         if self.current_move_number < self.max_moves:
@@ -30,6 +31,21 @@ class RuleBasedController:
             self.current_move_number += 1
             return snake, True
         return snake, False
+
+    def get_distance_from_wall(self, snake, bricks):
+        closest_distance_to_brick_x = self._MAX
+        closest_distance_to_brick_y = self._MAX
+        for itr in range(bricks.getNumBricks()):
+            dist_from_snake_head_x = (snake.x[0] - bricks.x[itr])
+            dist_from_snake_head_y = (snake.y[0] - bricks.y[itr])
+
+            if abs(dist_from_snake_head_x) < closest_distance_to_brick_x:
+                closest_distance_to_brick_x = dist_from_snake_head_x
+            
+            if abs(dist_from_snake_head_y) < closest_distance_to_brick_y:
+                closest_distance_to_brick_y = dist_from_snake_head_y
+
+        return closest_distance_to_brick_x, closest_distance_to_brick_y
 
             
 
