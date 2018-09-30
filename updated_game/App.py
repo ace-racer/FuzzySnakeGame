@@ -70,7 +70,7 @@ class App(Logger):
         # does snake collide with itself?
         for i in range(2,self.snake.length):
             if self.game.isCollision(self.snake.x[0],self.snake.y[0],self.snake.x[i], self.snake.y[i],40):
-                print("You lose! Collision with snake: ")
+                print("Snake tried to move in the {0} direction and collided with itself.".format(constants.move_direction_text_dict[self.snake.getCurrentDirection()]))
                 print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.snake.x[i]) + "," + str(self.snake.y[i]) + ")")
                 print("Your score: {0}".format(self._score))

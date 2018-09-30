@@ -102,6 +102,35 @@ class Snake:
                 closest_distance = current_distance
 
         return closest_distance
+
+    def will_snake_collide_with_itself_for_direction(self, direction):
+        """Will the snake collide with itself if it proceeds in the direction provided"""
+        snake_head_x = self.x[0]
+        snake_head_y = self.y[0]
+        for itr in range(1, self.length):
+            if self.y[itr] == snake_head_y:
+                if direction == constants.RIGHT:
+                    if abs(snake_head_x + self.step - self.x[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+                
+                if direction == constants.LEFT:
+                    if abs(snake_head_x - self.step - self.x[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+
+            elif self.x[itr] == snake_head_x:
+                if direction == constants.UP:
+                    if abs(snake_head_y - self.step - self.y[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+                
+                if direction == constants.DOWN:
+                    if abs(snake_head_y + self.step - self.y[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+
+            
+                    
+        return False
+
+
             
 
 

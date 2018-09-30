@@ -10,17 +10,16 @@ class RuleBasedController:
 
     def perform_next_move(self, snake, food, bricks):
         if self.current_move_number < self.max_moves:
-            current_snake_direction = snake.getCurrentDirection()
-
+            
             # if the food is to the left of the snake
-            if food.x < snake.x[0] and current_snake_direction != constants.RIGHT:
+            if food.x < snake.x[0] and not snake.will_snake_collide_with_itself_for_direction(constants.LEFT):
                 distance_from_wall = snake.get_distance_from_wall(bricks, constants.LEFT)
                 if not self.is_distance_too_less(distance_from_wall):
                     snake.moveLeft()
                 else:
                     snake.moveDown()
             # if food is to the right of the snake
-            elif food.x > snake.x[0] and current_snake_direction != constants.LEFT:
+            elif food.x > snake.x[0] and not snake.will_snake_collide_with_itself_for_direction(constants.RIGHT):
                 distance_from_wall = snake.get_distance_from_wall(bricks, constants.RIGHT)
                 if not self.is_distance_too_less(distance_from_wall):
                     snake.moveRight()
@@ -30,14 +29,14 @@ class RuleBasedController:
                 # the head of snake is at same column as the food
             
                 # snake is lower than the food
-                if food.y < snake.y[0] and current_snake_direction != constants.DOWN:
+                if food.y < snake.y[0] and not snake.will_snake_collide_with_itself_for_direction(constants.UP):
                     distance_from_wall = snake.get_distance_from_wall(bricks, constants.UP)
                     if not self.is_distance_too_less(distance_from_wall):
                         snake.moveUp()
                     else:
                         snake.moveLeft()
                 # snake is higher than the food
-                elif food.y > snake.y[0] and current_snake_direction != constants.UP:
+                elif food.y > snake.y[0] and not snake.will_snake_collide_with_itself_for_direction(constants.DOWN):
                     distance_from_wall = snake.get_distance_from_wall(bricks, constants.DOWN)
                     if not self.is_distance_too_less(distance_from_wall):
                         snake.moveDown()
@@ -49,7 +48,7 @@ class RuleBasedController:
         return snake, False
 
     def is_distance_too_less(self, distance):
-        if distance <= (constants.STEP_SIZE * 2):
+        if distance <= (2 * constants.STEP_SIZE):
             return True
         return False
 
