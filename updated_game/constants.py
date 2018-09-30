@@ -14,3 +14,5 @@ FUZZY = 2
 
 move_direction_text_dict = { UP: "UP", DOWN: "DOWN", LEFT: "LEFT", RIGHT: "RIGHT"}
 controller_name_mapping = { MANUAL: ManualController, RULE_BASED : RuleBasedController, FUZZY: FuzzyRulesController}
+MAX_VAL = 99999
+STEP_SIZE = 44

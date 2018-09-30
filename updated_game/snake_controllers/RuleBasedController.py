@@ -14,38 +14,36 @@ class RuleBasedController:
 
             # if the food is to the left of the snake
             if food.x < snake.x[0] and current_snake_direction != constants.RIGHT:
-                snake.moveLeft()
+                distance_from_wall = snake.get_distance_from_wall(bricks, constants.LEFT)
+                if not self.is_distance_too_less(distance_from_wall):
+                    snake.moveLeft()
             # if food is to the right of the snake
             elif food.x > snake.x[0] and current_snake_direction != constants.LEFT:
-                snake.moveRight()
+                distance_from_wall = snake.get_distance_from_wall(bricks, constants.RIGHT)
+                if not self.is_distance_too_less(distance_from_wall):
+                    snake.moveRight()
             else:
                 # the head of snake is at same column as the food
             
                 # snake is lower than the food
                 if food.y < snake.y[0] and current_snake_direction != constants.DOWN:
-                    snake.moveUp()
+                    distance_from_wall = snake.get_distance_from_wall(bricks, constants.UP)
+                    if not self.is_distance_too_less(distance_from_wall):
+                        snake.moveUp()
                 # snake is higher than the food
                 elif food.y > snake.y[0] and current_snake_direction != constants.UP:
-                    snake.moveDown()
+                    distance_from_wall = snake.get_distance_from_wall(bricks, constants.DOWN)
+                    if not self.is_distance_too_less(distance_from_wall):
+                        snake.moveDown()
             
             self.current_move_number += 1
             return snake, True
         return snake, False
 
-    def get_distance_from_wall(self, snake, bricks):
-        closest_distance_to_brick_x = self._MAX
-        closest_distance_to_brick_y = self._MAX
-        for itr in range(bricks.getNumBricks()):
-            dist_from_snake_head_x = (snake.x[0] - bricks.x[itr])
-            dist_from_snake_head_y = (snake.y[0] - bricks.y[itr])
-
-            if abs(dist_from_snake_head_x) < closest_distance_to_brick_x:
-                closest_distance_to_brick_x = dist_from_snake_head_x
-            
-            if abs(dist_from_snake_head_y) < closest_distance_to_brick_y:
-                closest_distance_to_brick_y = dist_from_snake_head_y
-
-        return closest_distance_to_brick_x, closest_distance_to_brick_y
+    def is_distance_too_less(self, distance):
+        if distance <= constants.STEP_SIZE * 2:
+            return True
+        return False
 
             
 
