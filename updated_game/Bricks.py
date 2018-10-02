@@ -28,7 +28,7 @@ class Bricks:
                 horizontal_pos = self.initial_x + (i * self.step) 
                 self.x.append(horizontal_pos)
                 surface.blit(image,(horizontal_pos, self.initial_y))
-        else:
+        elif self.brick_layout_type == 3:
             horizontal_pos = self.initial_x
 
             # first lay the horizontal bricks
