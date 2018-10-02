@@ -8,14 +8,14 @@ class Bricks:
     def __init__(self,x,y, brick_layout_type=0):
         self.initial_x = x * self.step
         self.initial_y = y * self.step
-        self.x = [self.initial_x]
-        self.y = [self.initial_y]
         self.brick_layout_type = brick_layout_type
-
+        if brick_layout_type != 0:
+            self.x = [self.initial_x]
+            self.y = [self.initial_y]
 
  
     def draw(self, surface, image):
-        if self.brick_layout_type == 0:
+        if self.brick_layout_type == 1:
             length = 5
             for i in range(0, length):
                 self.x.append(self.initial_x)
