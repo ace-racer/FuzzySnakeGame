@@ -27,7 +27,24 @@ class Bricks:
                 self.y.append(self.initial_y)
                 horizontal_pos = self.initial_x + (i * self.step) 
                 self.x.append(horizontal_pos)
-                surface.blit(image,(horizontal_pos, self.initial_y)) 
+                surface.blit(image,(horizontal_pos, self.initial_y))
+        else:
+            horizontal_pos = self.initial_x
+
+            # first lay the horizontal bricks
+            for i in range(0, self.bricks_length):
+                self.y.append(self.initial_y)
+                horizontal_pos = self.initial_x + (i * self.step) 
+                self.x.append(horizontal_pos)
+                surface.blit(image,(horizontal_pos, self.initial_y))
+            
+            # lay the vertical blocks where the horizontal bricks end
+            vertical_bricks_x = horizontal_pos
+            for i in range(0, self.bricks_length):
+                self.x.append(vertical_bricks_x)
+                vertical_pos = self.initial_y + (i * self.step) 
+                self.y.append(vertical_pos)
+                surface.blit(image,(vertical_bricks_x, vertical_pos)) 
 
         
 
