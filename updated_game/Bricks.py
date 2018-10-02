@@ -4,6 +4,7 @@ class Bricks:
     x = []
     y = []
     step = 44
+    bricks_length = 5
  
     def __init__(self,x,y, brick_layout_type=0):
         self.initial_x = x * self.step
@@ -16,14 +17,19 @@ class Bricks:
  
     def draw(self, surface, image):
         if self.brick_layout_type == 1:
-            length = 5
-            for i in range(0, length):
+            for i in range(0, self.bricks_length):
                 self.x.append(self.initial_x)
-
                 vertical_pos = self.initial_y + (i * self.step) 
                 self.y.append(vertical_pos)
-                
                 surface.blit(image,(self.initial_x, vertical_pos)) 
+        elif self.brick_layout_type == 2:
+            for i in range(0, self.bricks_length):
+                self.y.append(self.initial_y)
+                horizontal_pos = self.initial_x + (i * self.step) 
+                self.x.append(horizontal_pos)
+                surface.blit(image,(horizontal_pos, self.initial_y)) 
+
+        
 
     def getNumBricks(self):
         return len(self.x)
