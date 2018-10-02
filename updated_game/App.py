@@ -39,6 +39,7 @@ class App(Logger):
         self._score = 0
 
         # this needs to be updated as required
+        self.controller_type = controller_type
         self.snake_controller = constants.controller_name_mapping[controller_type]()
  
     def on_init(self):
@@ -106,6 +107,13 @@ class App(Logger):
             pygame.event.pump()
 
             self.snake, should_continue_running = self.snake_controller.perform_next_move(self.snake, self.food, self.bricks)
+            
+            if self.controller_type != constants.MANUAL:
+                keys = pygame.key.get_pressed() 
+                if (keys[K_ESCAPE]):
+                    print("Escape key pressed and so quitting the current game.")
+                    should_continue_running = False
+
             # self.log_snake_move(self.snake.getCurrentDirection())
             self._running = should_continue_running
             self.on_loop()
@@ -127,5 +135,6 @@ if __name__ == "__main__" :
     else:
         brick_layout_type = 0
     
+    print("Please press the Escape key to quit from the game.")
     theApp = App(controller_type, brick_layout_type)
     theApp.on_execute()
