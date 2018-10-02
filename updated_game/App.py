@@ -46,7 +46,7 @@ class App(Logger):
         pygame.init()
         self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE)
  
-        pygame.display.set_caption('Pygame pythonspot.com example')
+        # pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
         self._image_surf = pygame.image.load("assets/snake.png").convert()
         self._food_surf = pygame.image.load("assets/food.png").convert()
@@ -124,7 +124,7 @@ class App(Logger):
  
 if __name__ == "__main__" :
     if len(sys.argv) == 1:
-        print("Usage python App.py 0 (Manual)/1(Rule)/2(Fuzzy) [For controller type] 0/1/2 [For brick layout type]")
+        print("Usage python App.py 0 (Manual)/1(Rule)/2(Fuzzy) [For controller type] 0/1/2/3 [For brick layout type]")
     if len(sys.argv) >= 2:
         controller_type = int(sys.argv[1])
     else:
