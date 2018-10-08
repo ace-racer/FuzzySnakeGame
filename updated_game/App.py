@@ -124,7 +124,7 @@ class App(Logger):
  
 if __name__ == "__main__" :
     if len(sys.argv) == 1:
-        print("Usage python App.py 0 (Manual)/1(Rule)/2(Fuzzy) [For controller type] 0/1/2/3 [For brick layout type]")
+        print("Usage python App.py 0 (Manual)/1(Rule)/2(Fuzzy)/3(Fuzzy for bricks) [For controller type] 0/1/2/3 [For brick layout type]")
     if len(sys.argv) >= 2:
         controller_type = int(sys.argv[1])
     else:
