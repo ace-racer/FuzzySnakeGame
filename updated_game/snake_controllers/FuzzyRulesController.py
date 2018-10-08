@@ -115,6 +115,7 @@ class FuzzyRulesController:
     def get_angle_pm_left(self,food_y, food_x, snake_y,snake_x):
         '''Angle is based on the 4 quadrant
         We require to convert it back where 0 is the y-axis'''
+        print(str(food_y) + " " + str(food_x) + " " + str(snake_y) +" " + str(snake_x))
         angle = m.degrees(m.atan2((food_y-snake_y),(food_x - snake_x)))
         if angle <= 90 and angle >= 0:
             final_angle = 180-angle
@@ -129,6 +130,7 @@ class FuzzyRulesController:
     def get_angle_pm_up(self,food_y, food_x, snake_y,snake_x):
         '''Angle is based on the 4 quadrant
         We require to convert it back where 0 is the y-axis'''
+        print(str(food_y) + " " + str(food_x) + " " + str(snake_y) +" " + str(snake_x))
         angle = m.degrees(m.atan2((food_y-snake_y),(food_x - snake_x)))
         if angle <= 90 and angle >= 0:
             final_angle = 90 - angle
@@ -143,6 +145,7 @@ class FuzzyRulesController:
     def get_angle_pm_down(self,food_y, food_x, snake_y,snake_x):
         '''Angle is based on the 4 quadrant
         We require to convert it back where 0 is the y-axis'''
+        print(str(food_y) + " " + str(food_x) + " " + str(snake_y) +" " + str(snake_x))
         angle = m.degrees(m.atan2((food_y-snake_y),(food_x - snake_x)))
         if angle <= 90 and angle >= 0:
             final_angle = -90 - angle
@@ -166,18 +169,18 @@ class FuzzyRulesController:
                 next_move_crtl_fuzzy.input['food_loc'] = angle
                 result = next_move_crtl_fuzzy.compute()
                 result = int(next_move_crtl_fuzzy.output['Next Direction'])
-                self.next_move_pm_right.view(sim=next_move_crtl_fuzzy)
                 print(str(result)+"lulz" )
                 if result < 33:
                     snake.moveUp()
-                    print("Move up")
+                    print("Move up1")
                 if result >=33 and result <=67:
                     snake.moveRight()
-                    print("Move right")
+                    print("Move right2")
                 if result >=68:
                     snake.moveDown()
-                    print("Move down")
-            if snake.direction == constants.LEFT:
+                    print("Move down3")
+
+            elif snake.direction == constants.LEFT:
                 self.mf_pm_left()
                 angle = self.get_angle_pm_left(food.y, food.x, snake.y[0], snake.x[0])
                 print(angle)
@@ -186,16 +189,19 @@ class FuzzyRulesController:
                 next_move_crtl_fuzzy.input['food_loc'] = angle
                 result = next_move_crtl_fuzzy.compute()
                 result = int(next_move_crtl_fuzzy.output['Next Direction'])
-                self.next_move_pm_right.view(sim=next_move_crtl_fuzzy)
+
                 print(str(result)+"lulz" )
                 if result < 33:
                     snake.moveUp()
+                    print("Move up4")
                 if result >=33 and result <=67:
                     snake.moveLeft()
+                    print("Move Left5")
                 else:
                     snake.moveDown()
+                    print("Move Down6")
 
-            if snake.direction == constants.UP:
+            elif snake.direction == constants.UP:
                 self.mf_pm_up()
                 angle = self.get_angle_pm_up(food.y, food.x, snake.y[0], snake.x[0])
                 print(angle)
@@ -204,34 +210,39 @@ class FuzzyRulesController:
                 next_move_crtl_fuzzy.input['food_loc'] = angle
                 result = next_move_crtl_fuzzy.compute()
                 result = int(next_move_crtl_fuzzy.output['Next Direction'])
-                self.next_move_pm_right.view(sim=next_move_crtl_fuzzy)
                 print(str(result)+"lulz" )
                 if result < 33:
                     snake.moveLeft()
+                    print("Move Left7")
                 if result >=33 and result <=67:
                     snake.moveUp()
+                    print("Move up8")
                 else:
                     snake.moveRight()
+                    print("Move Right9")
 
-            if snake.direction == constants.DOWN:
+            elif snake.direction == constants.DOWN:
                 self.mf_pm_down()
-                angle = self.get_angle_pm_up(food.y, food.x, snake.y[0], snake.x[0])
+                angle = self.get_angle_pm_down(food.y, food.x, snake.y[0], snake.x[0])
                 print(angle)
                 next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3])
                 next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
                 next_move_crtl_fuzzy.input['food_loc'] = angle
                 result = next_move_crtl_fuzzy.compute()
                 result = int(next_move_crtl_fuzzy.output['Next Direction'])
-                self.next_move_pm_right.view(sim=next_move_crtl_fuzzy)
                 print(str(result)+"lulz" )
                 if result < 33:
-                    snake.moveLeft()
-                if result >=33 and result <=67:
-                    snake.moveUp()
-                else:
                     snake.moveRight()
+                    print("Move Left10")
+                if result >=33 and result <=67:
+                    snake.moveDown()
+                    print("Move up11")
+                else:
+                    snake.moveLeft()
+                    print("Move Right12")
 
 
             self.current_move_number += 1
             return snake, True
         return snake, False
+
