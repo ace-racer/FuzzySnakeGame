@@ -18,3 +18,6 @@ move_direction_text_dict = { UP: "UP", DOWN: "DOWN", LEFT: "LEFT", RIGHT: "RIGHT
 controller_name_mapping = { MANUAL: ManualController, RULE_BASED : RuleBasedController, FUZZY: FuzzyRulesController, FUZZY_WITH_BRICKS: FuzzyRulesForBricksController}
 MAX_VAL = 99999
 STEP_SIZE = 44
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)

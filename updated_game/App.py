@@ -75,7 +75,8 @@ class App(Logger):
                 print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.snake.x[i]) + "," + str(self.snake.y[i]) + ")")
                 print("Your score: {0}".format(self._score))
-                exit(0)
+                return True
+                
 
         # does snake collide with a brick?
         for i in range(self.bricks.getNumBricks()):
@@ -84,9 +85,9 @@ class App(Logger):
                 print("x[0] (" + str(self.snake.x[0]) + "," + str(self.snake.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.bricks.x[i]) + "," + str(self.bricks.y[i]) + ")")
                 print("Your score: {0}".format(self._score))
-                exit(0)
+                return True
  
-        pass
+        return False
  
     def on_render(self):
         self._display_surf.fill((0,0,0))
@@ -98,7 +99,8 @@ class App(Logger):
         pygame.display.flip()
  
     def on_cleanup(self):
-        pygame.quit()
+        self.draw_game_over(self._display_surf, self._score)
+        # pygame.quit()
  
     def on_execute(self):
         if self.on_init() == False:
@@ -118,10 +120,12 @@ class App(Logger):
 
             # self.log_snake_move(self.snake.getCurrentDirection())
             self._running = should_continue_running
-            self.on_loop()
+            is_collision = self.on_loop()
             self.on_render()
  
             time.sleep (50.0 / 1000.0)
+            if is_collision:
+                self._running = False
         self.on_cleanup()
 
     #Create the text used to display the score and draw it on the screen
@@ -135,6 +139,24 @@ class App(Logger):
         font = pygame.font.Font(None, 36) #Choose the font for the text
         text = font.render("Going: " + snake_direction_text, 1, (255, 255, 255)) #Create the text with white color
         screen.blit(text, (x, y)) #Draw the text on the screen       
+    
+    # draw the game over screen
+    # taken from https://www.teachyourselfpython.com/challenges.php?a=03_Pygame_Challenges_and_Learn&t=01_Function_based_game&s=07_Add_Game_over_feature
+    def draw_game_over(self, screen, score):
+        print("GAME OVER")
+        # pygame.draw.rect(screen, constants.WHITE, (200, 200, 300, 100), 0) #Draw a white box for the text to sit in
+
+        font = pygame.font.Font(None, 36) #Choose the font for the text
+        text = font.render("Game Over! Final score: " + str(score), 1, constants.BLACK) #Create the text for "GAME OVER"
+        screen.blit(text, (self.windowWidth / 2, self.windowHeight / 2)) #Draw the text on the screen
+
+        font = pygame.font.Font(None, 28) #Make the font a bit smaller for this bit
+        text = font.render("Press Escape to quit the game.", 1, constants.WHITE)
+        screen.blit(text, (self.windowWidth / 2, (self.windowHeight + 100) / 2)) #Draw the text on the screen
+
+        keys = pygame.key.get_pressed() 
+        if (keys[K_ESCAPE]):
+            pygame.quit()
  
 if __name__ == "__main__" :
     if len(sys.argv) == 1:
