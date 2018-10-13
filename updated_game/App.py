@@ -93,6 +93,8 @@ class App(Logger):
         self.snake.draw(self._display_surf, self._image_surf)
         self.food.draw(self._display_surf, self._food_surf)
         self.bricks.draw(self._display_surf, self._brick_image)
+        self.draw_score(self._display_surf, self.windowWidth - 200, self.windowHeight - 50, self._score)
+        self.draw_snake_direction(self._display_surf, 50, self.windowHeight - 50, constants.move_direction_text_dict[self.snake.getCurrentDirection()])
         pygame.display.flip()
  
     def on_cleanup(self):
@@ -121,6 +123,18 @@ class App(Logger):
  
             time.sleep (50.0 / 1000.0)
         self.on_cleanup()
+
+    #Create the text used to display the score and draw it on the screen
+    def draw_score(self, screen, x, y, score):
+        font = pygame.font.Font(None, 36) #Choose the font for the text
+        text = font.render("Score = " + str(score), 1, (255, 255, 255)) #Create the text with white color
+        screen.blit(text, (x, y)) #Draw the text on the screen  
+
+    #Create the text used to display the current direction the snake head is moving
+    def draw_snake_direction(self, screen, x, y, snake_direction_text):
+        font = pygame.font.Font(None, 36) #Choose the font for the text
+        text = font.render("Going: " + snake_direction_text, 1, (255, 255, 255)) #Create the text with white color
+        screen.blit(text, (x, y)) #Draw the text on the screen       
  
 if __name__ == "__main__" :
     if len(sys.argv) == 1:
