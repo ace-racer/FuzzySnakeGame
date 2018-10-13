@@ -53,6 +53,24 @@ class FuzzyRulesController:
         self.rule5 = ctrl.Rule(self.collison_ang['90'], self.next_move_pm_right['up'])
         self.rule6 = ctrl.Rule(self.collison_ang['-90'], self.next_move_pm_right['down'])
 
+###############################################################################################
+        self.collison_ang_2 = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang_2')
+        '''Based on a clock with respect the the snake head'''
+        self.collison_ang_2['0'] = fuzz.trapmf(self.collison_ang_2.universe,[-90,-45,45,90])
+        self.collison_ang_2['90'] = fuzz.trimf(self.collison_ang_2.universe,[45,90,135])
+        self.collison_ang_2['-90'] = fuzz.trimf(self.collison_ang_2.universe, [-135,-90,-45])
+
+        self.rule7 = ctrl.Rule(self.collison_ang_2['0'], self.next_move_pm_right['right'])
+        self.rule8 = ctrl.Rule(self.collison_ang_2['90'], self.next_move_pm_right['up'])
+        self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_right['down'])
+
+        self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,0,5])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[-5,0,10,10])
+
+        self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_right['up'])
+        self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_right['down'])
+
 
     def mf_pm_left(self):
         '''if the previous move is LEFT, the only direciton
@@ -81,6 +99,23 @@ class FuzzyRulesController:
         self.rule4 = ctrl.Rule(self.collison_ang['0'], self.next_move_pm_left['up'])
         self.rule5 = ctrl.Rule(self.collison_ang['90'], self.next_move_pm_left['down'])
         self.rule6 = ctrl.Rule(self.collison_ang['-90'], self.next_move_pm_left['up'])
+###############################################################################################
+        self.collison_ang_2 = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang_2')
+        '''Based on a clock with respect the the snake head'''
+        self.collison_ang_2['0'] = fuzz.trapmf(self.collison_ang_2.universe,[-90,-45,45,90])
+        self.collison_ang_2['90'] = fuzz.trimf(self.collison_ang_2.universe,[45,90,135])
+        self.collison_ang_2['-90'] = fuzz.trimf(self.collison_ang_2.universe, [-135,-90,-45])
+
+        self.rule7 = ctrl.Rule(self.collison_ang_2['0'], self.next_move_pm_left['left'])
+        self.rule8 = ctrl.Rule(self.collison_ang_2['90'], self.next_move_pm_left['down'])
+        self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_left['up'])
+
+        self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,0,5])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[-5,0,10,10])
+
+        self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_left['down'])
+        self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_left['up'])
 
 
     def mf_pm_up(self):
@@ -110,6 +145,24 @@ class FuzzyRulesController:
         self.rule4 = ctrl.Rule(self.collison_ang['0'], self.next_move_pm_up['left'])
         self.rule5 = ctrl.Rule(self.collison_ang['90'], self.next_move_pm_up['left'])
         self.rule6 = ctrl.Rule(self.collison_ang['-90'], self.next_move_pm_up['right'])
+###############################################################################################
+        self.collison_ang_2 = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang_2')
+        '''Based on a clock with respect the the snake head'''
+        self.collison_ang_2['0'] = fuzz.trapmf(self.collison_ang_2.universe,[-90,-45,45,90])
+        self.collison_ang_2['90'] = fuzz.trimf(self.collison_ang_2.universe,[45,90,135])
+        self.collison_ang_2['-90'] = fuzz.trimf(self.collison_ang_2.universe, [-135,-90,-45])
+
+        self.rule7 = ctrl.Rule(self.collison_ang_2['0'], self.next_move_pm_up['up'])
+        self.rule8 = ctrl.Rule(self.collison_ang_2['90'], self.next_move_pm_up['left'])
+        self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_up['right'])
+
+        self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,0,5])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[-5,0,10,10])
+
+        self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_up['right'])
+        self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_up['left'])
+
     #
     def mf_pm_down(self):
         '''if the previous move is DOWN, the only direciton
@@ -129,7 +182,7 @@ class FuzzyRulesController:
         self.rule2 = ctrl.Rule(self.food_loc['left'], self.next_move_pm_down['right'])
         self.rule3 = ctrl.Rule(self.food_loc['right'], self.next_move_pm_down['left'])
 
-        self.collison_ang_1 = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang')
+        self.collison_ang = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang')
         '''Based on a clock with respect the the snake head'''
         self.collison_ang['0'] = fuzz.trapmf(self.collison_ang.universe,[-90,-45,45,90])
         self.collison_ang['90'] = fuzz.trimf(self.collison_ang.universe,[45,90,135])
@@ -138,7 +191,24 @@ class FuzzyRulesController:
         self.rule4 = ctrl.Rule(self.collison_ang['0'], self.next_move_pm_down['left'])
         self.rule5 = ctrl.Rule(self.collison_ang['90'], self.next_move_pm_down['right'])
         self.rule6 = ctrl.Rule(self.collison_ang['-90'], self.next_move_pm_down['left'])
+###############################################################################################
+        self.collison_ang_2 = ctrl.Antecedent(np.arange(-181, 181, 1), 'collison_ang_2')
+        '''Based on a clock with respect the the snake head'''
+        self.collison_ang_2['0'] = fuzz.trapmf(self.collison_ang_2.universe,[-90,-45,45,90])
+        self.collison_ang_2['90'] = fuzz.trimf(self.collison_ang_2.universe,[45,90,135])
+        self.collison_ang_2['-90'] = fuzz.trimf(self.collison_ang_2.universe, [-135,-90,-45])
 
+        self.rule7 = ctrl.Rule(self.collison_ang_2['0'], self.next_move_pm_down['down'])
+        self.rule8 = ctrl.Rule(self.collison_ang_2['90'], self.next_move_pm_down['right'])
+        self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_down['left'])
+
+#From the viewpoint of the snake
+        self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,0,5])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[-5,0,10,10])
+
+        self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_down['left'])
+        self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_down['right'])
 
     def get_angle_pm_right(self,food_y, food_x, snake_y,snake_x):
         '''Angle is based on the 4 quadrant
@@ -221,10 +291,78 @@ class FuzzyRulesController:
             pass
         return snake_x,snake_y
 
+    def weight_snake_pm_up(self,snake_x , snake_y):
+        snake_pos = []
+        left = 0
+        right = 0
+        for i in range(0,len(snake_x)):
+            x_head = snake_x[0]
+            y_head = snake_y[0]
+            left_right = int((x_head - snake_x[i])/44)
+            snake_pos.append(left_right)
+            if left_right < 0:
+                right += 1
+            elif left_right > 0:
+                left +=1
+            overall = max(left,right)/len(snake_x)*10
+            print(overall)
+        return overall
+
+    def weight_snake_pm_down(self,snake_x , snake_y):
+        snake_pos = []
+        left = 0
+        right = 0
+        for i in range(0,len(snake_x)):
+            x_head = snake_x[0]
+            y_head = snake_y[0]
+            left_right = int((x_head - snake_x[i])/44)
+            snake_pos.append(left_right)
+            if left_right < 0:
+                left += 1
+            elif left_right > 0:
+                right +=1
+            overall = max(left,right)/len(snake_x)*10
+            print(overall)
+        return overall
+
+    def weight_snake_pm_left(self,snake_x , snake_y):
+        snake_pos = []
+        left = 0
+        right = 0
+        for i in range(0,len(snake_x)):
+            x_head = snake_x[0]
+            y_head = snake_y[0]
+            left_right = int((y_head - snake_y[i])/44)
+            snake_pos.append(left_right)
+            if left_right > 0:
+                left += 1
+            elif left_right < 0:
+                right +=1
+            overall = max(left,right)/len(snake_x)*10
+            print(overall)
+        return overall
+
+    def weight_snake_pm_right(self,snake_x , snake_y):
+        snake_pos = []
+        left = 0
+        right = 0
+        for i in range(0,len(snake_x)):
+            x_head = snake_x[0]
+            y_head = snake_y[0]
+            left_right = int((y_head - snake_y[i])/44)
+            snake_pos.append(left_right)
+            if left_right < 0:
+                left += 1
+            elif left_right > 0:
+                right +=1
+            overall = max(left,right)/len(snake_x)*10
+            print(overall)
+        return overall
+
 
     def perform_next_move(self, snake, food, bricks):
         overall_rules = []
-        indicator = 0
+        indicator = 0 #counter for offending angle
         if self.current_move_number < self.max_moves:
             if self.old_snake_pos_y ==  snake.y[0] and self.old_snake_pos_x == snake.x[0] and self.current_move_number != 0:
                 if snake.direction == constants.LEFT:
@@ -249,27 +387,44 @@ class FuzzyRulesController:
                     overall_man_dist = self.manhatten_distance(snake_x,snake_y)
                     print(overall_man_dist)
                     if snake.length > 4:
-                        print("Wee")
                         for i in range(3, len(overall_man_dist)):
                             if overall_man_dist[i] == 1:
-                                print('Offending parts are:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
-                                        str(snake.y[i]) + " " +str(snake.x[i]))
-                                collison_angle = self.get_angle_pm_right(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
-                                print('Collison angle is :' + str(collison_angle))
-                                overall_rules.extend((self.rule4, self.rule5, self.rule6))
-
-                                indicator = 1
-                            else:
-                                pass
-
-                    next_move_crtl = ctrl.ControlSystem(overall_rules)
-                    next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
-                    next_move_crtl_fuzzy.input['food_loc'] = angle
-
+                                indicator = indicator + 1
+                                if indicator ==1:
+                                    print('Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle = self.get_angle_pm_right(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('Collison angle is :' + str(collison_angle))
+                                elif indicator == 2:
+                                    print('2nd Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle_2 = self.get_angle_pm_right(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('2nd Collison angle is :' + str(collison_angle_2))
+                                else:
+                                    pass
                     if indicator == 1:
+                        print('yeah')
+                        overall_weight = self.weight_snake_pm_right(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
                         next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
+                    elif indicator >= 2:
+                        print('bah')
+                        overall_weight = self.weight_snake_pm_right(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6, self.rule7, self.rule8, self.rule9,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
+                        next_move_crtl_fuzzy.input['collison_ang_2'] = collison_angle_2 + collison_angle
+                        next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
                     else:
-                        pass
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
 
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
@@ -298,29 +453,45 @@ class FuzzyRulesController:
                     overall_man_dist = self.manhatten_distance(snake_x,snake_y)
                     print(overall_man_dist)
                     if snake.length > 4:
-                        print("Wee")
                         for i in range(3, len(overall_man_dist)):
                             if overall_man_dist[i] == 1:
-                                print('yeah')
-                                collison_angle = self.get_angle_pm_left(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
-                                print('Offending parts are:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
-                                    str(snake.y[i]) + " " +str(snake.x[i]))
-                                print('Collison angle is :' + str(collison_angle))
-                                overall_rules.extend((self.rule4, self.rule5, self.rule6))
-
-                                indicator = 1
-                            else:
-                                pass
-                    next_move_crtl = ctrl.ControlSystem(overall_rules)
-                    next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
-                    next_move_crtl_fuzzy.input['food_loc'] = angle
-
-
-
+                                indicator = indicator + 1
+                                if indicator ==1:
+                                    print('Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle = self.get_angle_pm_left(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('Collison angle is :' + str(collison_angle))
+                                elif indicator == 2:
+                                    print('2nd Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle_2 = self.get_angle_pm_left(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('2nd Collison angle is :' + str(collison_angle_2))
+                                else:
+                                    pass
                     if indicator == 1:
+                        print('yeah')
+                        overall_weight = self.weight_snake_pm_left(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
                         next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
+
+                    elif indicator >= 2:
+                        print('bah')
+                        overall_weight = self.weight_snake_pm_left(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6, self.rule7, self.rule8, self.rule9,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
+                        next_move_crtl_fuzzy.input['collison_ang_2'] = (collison_angle_2 + collison_angle)
+                        next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
                     else:
-                        pass
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
 
 
                     result = next_move_crtl_fuzzy.compute()
@@ -343,35 +514,51 @@ class FuzzyRulesController:
                     self.mf_pm_up()
                     overall_rules = [self.rule1, self.rule2, self.rule3]
                     angle = self.get_angle_pm_up(food.y, food.x, snake.y[0], snake.x[0])
-
                     print("Angle :" +str(angle))
-
                     snake_x,snake_y = self.check_snake(snake.x[0:snake.length],snake.y[0:snake.length])
                     overall_man_dist = self.manhatten_distance(snake_x,snake_y)
                     print(overall_man_dist)
                     if snake.length > 4:
-                        print("weee")
                         for i in range(3, len(overall_man_dist)):
                             if overall_man_dist[i] == 1:
-
-                                collison_angle = self.get_angle_pm_up(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
-                                print('Offending parts are:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
-                                    str(snake.y[i]) + " " +str(snake.x[i]))
-                                print('Collison angle is :' + str(collison_angle))
-                                overall_rules.extend((self.rule4, self.rule5, self.rule6))
-
-                                indicator = 1
-                            else:
-                                pass
-                    next_move_crtl = ctrl.ControlSystem(overall_rules)
-                    next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
-                    next_move_crtl_fuzzy.input['food_loc'] = angle
-
-
+                                indicator = indicator + 1
+                                if indicator ==1:
+                                    print('Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle = self.get_angle_pm_up(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('Collison angle is :' + str(collison_angle))
+                                elif indicator == 2:
+                                    print('2nd Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle_2 = self.get_angle_pm_up(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('2nd Collison angle is :' + str(collison_angle_2))
+                                else:
+                                    pass
                     if indicator == 1:
+                        print('yeah')
+                        overall_weight = self.weight_snake_pm_up(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
                         next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
+
+                    elif indicator >= 2:
+                        print('bah')
+                        overall_weight = self.weight_snake_pm_up(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6, self.rule7, self.rule8, self.rule9,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
+                        next_move_crtl_fuzzy.input['collison_ang_2'] = (collison_angle_2 + collison_angle)
+                        next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
                     else:
-                        pass
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
+
 
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
@@ -399,26 +586,45 @@ class FuzzyRulesController:
                     overall_man_dist = self.manhatten_distance(snake_x,snake_y)
                     print(overall_man_dist)
                     if snake.length > 4:
-                        print("wee")
                         for i in range(3, len(overall_man_dist)):
                             if overall_man_dist[i] == 1:
-                                collison_angle = self.get_angle_pm_down(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
-                                print('Offending parts are:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
-                                    str(snake.y[i]) + " " +str(snake.x[i]))
-                                print('Collison angle is :' + str(collison_angle))
-                                overall_rules.extend((self.rule4, self.rule5, self.rule6))
-                                indicator = 1
-                            else:
-                                pass
-                    next_move_crtl = ctrl.ControlSystem(overall_rules)
-                    next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
-                    next_move_crtl_fuzzy.input['food_loc'] = angle
-
-
+                                indicator = indicator + 1
+                                if indicator ==1:
+                                    print('Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle = self.get_angle_pm_down(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('Collison angle is :' + str(collison_angle))
+                                elif indicator == 2:
+                                    print('2nd Offending part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                            str(snake.y[i]) + " " +str(snake.x[i]))
+                                    collison_angle_2 = self.get_angle_pm_down(snake.y[i], snake.x[i],snake.y[0], snake.x[0])
+                                    print('2nd Collison angle is :' + str(collison_angle_2))
+                                else:
+                                    pass
                     if indicator == 1:
+                        print('yeah')
+                        overall_weight = self.weight_snake_pm_down(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
                         next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
+
+                    elif indicator >= 2:
+                        print('bah')
+                        overall_weight = self.weight_snake_pm_down(snake_x,snake_y)
+                        overall_rules.extend((self.rule4, self.rule5, self.rule6, self.rule7, self.rule8, self.rule9,self.rule10,self.rule11))
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
+                        next_move_crtl_fuzzy.input['collison_ang_2'] = (collison_angle_2 + collison_angle)
+                        next_move_crtl_fuzzy.input['collison_ang'] = collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
                     else:
-                        pass
+                        next_move_crtl = ctrl.ControlSystem(overall_rules)
+                        next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
+                        next_move_crtl_fuzzy.input['food_loc'] = angle
 
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
@@ -442,7 +648,3 @@ class FuzzyRulesController:
                 self.current_move_number += 1
             return snake, True
         return snake, False
-
-
-
-
