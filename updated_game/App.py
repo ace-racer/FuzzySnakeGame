@@ -149,7 +149,7 @@ class App(Logger):
     # taken from https://www.teachyourselfpython.com/challenges.php?a=03_Pygame_Challenges_and_Learn&t=01_Function_based_game&s=07_Add_Game_over_feature
     def draw_game_over(self, screen, score):
         font = pygame.font.Font(None, 28) #Choose the font for the text
-        text = font.render("Game Over! Final score: " + str(score), 1, constants.WHITE) #Create the text for "GAME OVER"
+        text = font.render("COLLISION! GAME OVER!", 1, constants.WHITE) #Create the text for "GAME OVER"
         screen.blit(text, (self.windowWidth / 2, self.windowHeight / 2)) #Draw the text on the screen
     
  
