@@ -78,3 +78,60 @@ class Snake:
     def draw(self, surface, image):
         for i in range(0,self.length):
             surface.blit(image,(self.x[i],self.y[i])) 
+
+    def get_distance_from_wall(self, bricks, direction):
+        """
+            Get the distance of the snake from the brick wall given that the snake moves in the provided direction
+        """
+        num_bricks = bricks.getNumBricks()
+        closest_distance = constants.MAX_VAL
+
+        for itr in range(num_bricks):
+            current_distance = constants.MAX_VAL
+            if direction == constants.UP or direction == constants.DOWN:
+                # if the brick is directly above or below the snake
+                if bricks.x[itr] == self.x[0]:
+                    current_distance = abs(bricks.y[itr] - self.y[0])
+
+            if direction == constants.LEFT or direction == constants.RIGHT:
+                # if the brick is directly to the left or right of the snake
+                if bricks.y[itr] == self.y[0]:
+                    current_distance = abs(self.x[0] - bricks.x[itr])
+
+            if current_distance < closest_distance:
+                closest_distance = current_distance
+
+        return closest_distance
+
+    def will_snake_collide_with_itself_for_direction(self, direction):
+        """Will the snake collide with itself if it proceeds in the direction provided"""
+        snake_head_x = self.x[0]
+        snake_head_y = self.y[0]
+        for itr in range(1, self.length):
+            if self.y[itr] == snake_head_y:
+                if direction == constants.RIGHT:
+                    if abs(snake_head_x + self.step - self.x[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+                
+                if direction == constants.LEFT:
+                    if abs(snake_head_x - self.step - self.x[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+
+            elif self.x[itr] == snake_head_x:
+                if direction == constants.UP:
+                    if abs(snake_head_y - self.step - self.y[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+                
+                if direction == constants.DOWN:
+                    if abs(snake_head_y + self.step - self.y[itr]) <= 1.5 * constants.STEP_SIZE:
+                        return True
+
+            
+                    
+        return False
+
+
+            
+
+
+            
