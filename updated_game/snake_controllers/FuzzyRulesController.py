@@ -35,7 +35,7 @@ class FuzzyRulesController:
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
-        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-60,0, 60])
+        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-50,0, 50])
         self.food_loc['right'] = fuzz.trimf(self.food_loc.universe,[45,135,181])
         self.food_loc['left'] = fuzz.trimf(self.food_loc.universe, [-181,-135,-45])
 
@@ -91,7 +91,7 @@ class FuzzyRulesController:
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
-        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-60,0, 60])
+        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-50,0, 50])
         self.food_loc['right'] = fuzz.trimf(self.food_loc.universe,[45,135,181])
         self.food_loc['left'] = fuzz.trimf(self.food_loc.universe, [-181,-135,-45])
 
@@ -146,7 +146,7 @@ class FuzzyRulesController:
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
-        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-60,0, 60])
+        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-50,0, 50])
         self.food_loc['right'] = fuzz.trimf(self.food_loc.universe,[45,135,181])
         self.food_loc['left'] = fuzz.trimf(self.food_loc.universe, [-181,-135,-45])
 
@@ -200,7 +200,7 @@ class FuzzyRulesController:
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
-        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-60,0, 60])
+        self.food_loc['up'] = fuzz.trimf(self.food_loc.universe,[-50,0, 50])
         self.food_loc['right'] = fuzz.trimf(self.food_loc.universe,[45,135,181])
         self.food_loc['left'] = fuzz.trimf(self.food_loc.universe, [-181,-135,-45])
 
