@@ -432,7 +432,7 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        check_left_right = left + right
+        check_left_right = left - right
 
         if (left == 0 and right == 0) or check_left_right == 0:
             x = random.randint(1,3)
@@ -471,7 +471,7 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        check_left_right = left + right
+        check_left_right = left - right
 
         if (left == 0 and right == 0) or check_left_right == 0:
             x = random.randint(1,3)
@@ -509,7 +509,7 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        check_left_right = left + right
+        check_left_right = left - right
 
         if (left == 0 and right == 0) or check_left_right == 0:
             x = random.randint(1,3)
@@ -548,7 +548,7 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        check_left_right = left + right
+        check_left_right = left - right
 
         if (left == 0 and right == 0) or check_left_right == 0:
             x = random.randint(1,3)
