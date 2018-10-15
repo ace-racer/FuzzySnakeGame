@@ -4,7 +4,7 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import numpy as np
 import math as m
-
+import random
 
 #To Calculate the angle between 2 points
 
@@ -29,9 +29,9 @@ class FuzzyRulesForBricksController:
         '''if the previous move is RIGHT, the only direciton
         you can move is UP, RIGHT, DOWN'''
         self.next_move_pm_right = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
-        self.next_move_pm_right['up'] = fuzz.trapmf(self.next_move_pm_right.universe,[0,0,25, 40])
+        self.next_move_pm_right['up'] = fuzz.trapmf(self.next_move_pm_right.universe,[0,0,25, 50])
         self.next_move_pm_right['right'] = fuzz.trimf(self.next_move_pm_right.universe,[25,50,75])
-        self.next_move_pm_right['down'] = fuzz.trapmf(self.next_move_pm_right.universe,[60,75,100,100])
+        self.next_move_pm_right['down'] = fuzz.trapmf(self.next_move_pm_right.universe,[50,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -65,8 +65,8 @@ class FuzzyRulesForBricksController:
         self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_right['down'])
 
         self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
-        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-5,0])
-        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,5,10,10])
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-2,0])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,2,10,10])
 
         self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_right['down'])
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_right['up'])
@@ -105,9 +105,9 @@ class FuzzyRulesForBricksController:
         '''if the previous move is LEFT, the only direciton
         you can move is UP, LEFT, DOWN'''
         self.next_move_pm_left = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
-        self.next_move_pm_left['up'] = fuzz.trapmf(self.next_move_pm_left.universe,[0,0,25, 40])
+        self.next_move_pm_left['up'] = fuzz.trapmf(self.next_move_pm_left.universe,[0,0,25, 50])
         self.next_move_pm_left['left'] = fuzz.trimf(self.next_move_pm_left.universe,[25,50,75])
-        self.next_move_pm_left['down'] = fuzz.trapmf(self.next_move_pm_left.universe,[60,75,100,100])
+        self.next_move_pm_left['down'] = fuzz.trapmf(self.next_move_pm_left.universe,[50,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -140,8 +140,8 @@ class FuzzyRulesForBricksController:
         self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_left['up'])
 
         self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
-        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-5,0])
-        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,5,10,10])
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-2,0])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,2,10,10])
 
         self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_left['up'])
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_left['down'])
@@ -172,8 +172,8 @@ class FuzzyRulesForBricksController:
         self.collison_brick_ang_2['-90'] = fuzz.trimf(self.collison_brick_ang_2.universe, [-135,-90,-25])
 
         self.rule18 = ctrl.Rule(self.collison_brick_ang_2['0'], self.next_move_pm_left['left'])
-        self.rule19 = ctrl.Rule(self.collison_brick_ang_2['90'], self.next_move_pm_left['up'])
-        self.rule20 = ctrl.Rule(self.collison_brick_ang_2['-90'], self.next_move_pm_left['down'])
+        self.rule19 = ctrl.Rule(self.collison_brick_ang_2['90'], self.next_move_pm_left['down'])
+        self.rule20 = ctrl.Rule(self.collison_brick_ang_2['-90'], self.next_move_pm_left['up'])
 
 ###############################################################################################
 
@@ -181,9 +181,9 @@ class FuzzyRulesForBricksController:
         '''if the previous move is UP, the only direciton
         you can move is UP, LEFT, RIGHT'''
         self.next_move_pm_up = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
-        self.next_move_pm_up['left'] = fuzz.trapmf(self.next_move_pm_up.universe,[0,0,25, 40])
+        self.next_move_pm_up['left'] = fuzz.trapmf(self.next_move_pm_up.universe,[0,0,25, 50])
         self.next_move_pm_up['up'] = fuzz.trimf(self.next_move_pm_up.universe,[25,50,75])
-        self.next_move_pm_up['right'] = fuzz.trapmf(self.next_move_pm_up.universe, [60,75,100,100])
+        self.next_move_pm_up['right'] = fuzz.trapmf(self.next_move_pm_up.universe, [50,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -216,8 +216,8 @@ class FuzzyRulesForBricksController:
         self.rule9 = ctrl.Rule(self.collison_ang_2['-90'], self.next_move_pm_up['right'])
 
         self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
-        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-5,0])
-        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,5,10,10])
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-2,0])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,2,10,10])
 
         self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_up['right'])
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_up['left'])
@@ -255,9 +255,9 @@ class FuzzyRulesForBricksController:
         '''if the previous move is DOWN, the only direciton
         you can move is DOWN, LEFT, RIGHT'''
         self.next_move_pm_down = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
-        self.next_move_pm_down['left'] = fuzz.trapmf(self.next_move_pm_down.universe,[0,0,25, 40])
+        self.next_move_pm_down['left'] = fuzz.trapmf(self.next_move_pm_down.universe,[0,0,25, 50])
         self.next_move_pm_down['down'] = fuzz.trimf(self.next_move_pm_down.universe,[25,50,75])
-        self.next_move_pm_down['right'] = fuzz.trapmf(self.next_move_pm_down.universe,[60,75,100,100])
+        self.next_move_pm_down['right'] = fuzz.trapmf(self.next_move_pm_down.universe,[50,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -291,8 +291,8 @@ class FuzzyRulesForBricksController:
 
 #From the viewpoint of the snake
         self.weight_snake = ctrl.Antecedent(np.arange(-10,10,1),'weight_snake')
-        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,-5,0])
-        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,5,10,10])
+        self.weight_snake['left'] = fuzz.trapmf(self.weight_snake.universe,[-10,-10,0,0])
+        self.weight_snake['right'] = fuzz.trapmf(self.weight_snake.universe,[0,0,10,10])
 
         self.rule10 = ctrl.Rule(self.weight_snake['left'], self.next_move_pm_down['left'])
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_down['right'])
@@ -432,9 +432,22 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        overall = ((right-left)/(right + left)) * 10
-        print(overall)
-        return overall
+        check_left_right = left + right
+
+        if (left == 0 and right == 0) or check_left_right == 0:
+            x = random.randint(1,3)
+            if x == 1:
+                print('Snek is in a straight line so RNG God says move to the Left (-10)')
+                overall = -10
+                return overall
+            else:
+                print('Snek is in a straight line so RNG God says move to the  right (10)')
+                overall = -10
+                return overall
+        else:
+            overall = ((right-left)/(right + left)) * 10
+            print(overall)
+            return overall
 
     def weight_snake_pm_down(self,snake_x , snake_y):
         snake_pos = []
@@ -458,9 +471,22 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        overall = ((right-left)/(right + left)) * 10
-        print(overall)
-        return overall
+        check_left_right = left + right
+
+        if (left == 0 and right == 0) or check_left_right == 0:
+            x = random.randint(1,3)
+            if x == 1:
+                print('Snek is in a straight line so RNG God says move to the Left (-10)')
+                overall = -10
+                return overall
+            else:
+                print('Snek is in a straight line so RNG God says move to the  right (10)')
+                overall = -10
+                return overall
+        else:
+            overall = ((right-left)/(right + left)) * 10
+            print(overall)
+            return overall
 
     def weight_snake_pm_left(self,snake_x , snake_y):
         snake_pos = []
@@ -483,9 +509,23 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        overall = ((right-left)/(right + left)) * 10
-        print(overall)
-        return overall
+        check_left_right = left + right
+
+        if (left == 0 and right == 0) or check_left_right == 0:
+            x = random.randint(1,3)
+            if x == 1:
+                print('Snek is in a straight line so RNG God says move to the Left (-10)')
+                overall = -10
+                return overall
+            else:
+                print('Snek is in a straight line so RNG God says move to the  right (10)')
+                overall = -10
+                return overall
+        else:
+            overall = ((right-left)/(right + left)) * 10
+            print(overall)
+            return overall
+
 
     def weight_snake_pm_right(self,snake_x , snake_y):
         snake_pos = []
@@ -508,9 +548,22 @@ class FuzzyRulesForBricksController:
         print(left)
         print(right)
         print(center)
-        overall = ((right-left)/(right + left)) * 10
-        print(overall)
-        return overall
+        check_left_right = left + right
+
+        if (left == 0 and right == 0) or check_left_right == 0:
+            x = random.randint(1,3)
+            if x == 1:
+                print('Snek is in a straight line so RNG God says move to the Left (-10)')
+                overall = -10
+                return overall
+            else:
+                print('Snek is in a straight line so RNG God says move to the  right (10)')
+                overall = -10
+                return overall
+        else:
+            overall = ((right-left)/(right + left)) * 10
+            print(overall)
+            return overall
 
     def spiral_pm_right(self,snake_x , snake_y):
         angle_of_snake_body = []
@@ -579,7 +632,7 @@ class FuzzyRulesForBricksController:
         for i in range(2, len(man_distance)):
             angle = self.get_angle_pm_down(snake_y[i], snake_x[i], y_head,x_head)
             angle_of_snake_body.append(angle)
-            print(angle_of_snake_body)
+        print(angle_of_snake_body)
         for angle in angle_of_snake_body:
             if angle == 90:
                 print('Spiral Angle is' + str(angle))
@@ -640,7 +693,11 @@ class FuzzyRulesForBricksController:
                                         str(bricks.y[i]) + " " +str(bricks.x[i]))
                                 brick_collison_angle = self.get_angle_pm_right(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
                                 print('1st Brick Collison angle is :' + str(brick_collison_angle))
-                            elif indicator == 2:
+                                print(i)
+                                print(ind_brick)
+                            elif ind_brick == 2:
+                                print(i)
+                                print(ind_brick)
                                 print('2nd Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
                                         str(bricks.y[i]) + " " +str(bricks.x[i]))
                                 brick_collison_angle_2 = self.get_angle_pm_right(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
@@ -765,11 +822,19 @@ class FuzzyRulesForBricksController:
                         # next_move_crtl_fuzzy.input['collison_brick_ang_2'] = brick_collison_angle_2 + brick_collison_angle
 
                     elif indicator == 0 and ind_brick == 1:
+                        overall_weight = self.weight_snake_pm_right(snake_x,snake_y)
+                        print("Overall Weight is " + str(overall_weight))
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
+                                                            self.rule10,self.rule11,
                                                             self.rule15,self.rule16,self.rule17])
                         next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
                         next_move_crtl_fuzzy.input['food_loc'] = angle
+                        if brick_collison_angle == 0:
+                                print('Snek heading straight on so we depend on our Weight Goddess')
+                                brick_collison_angle = (overall_weight -0) *9
+                        print(brick_collison_angle)
                         next_move_crtl_fuzzy.input['collison_brick_ang'] = brick_collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
 
                     elif indicator == 0 and ind_brick >= 1:
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
@@ -787,15 +852,15 @@ class FuzzyRulesForBricksController:
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
                     print(str(result)+" is the output score." )
-                    if result >= 0 and result < 35:
+                    if result >= 0 and result < 40:
                         snake.moveUp()
                         print("Move up1")
                         print("################")
-                    if result >=35 and result <=65:
+                    if result >=40 and result <=60:
                         snake.moveRight()
                         print("Move right2")
                         print("################")
-                    if result >65 and result <= 100:
+                    if result >60 and result <= 100:
                         snake.moveDown()
                         print("Move down3")
                         print("################")
@@ -823,7 +888,11 @@ class FuzzyRulesForBricksController:
                                         str(bricks.y[i]) + " " +str(bricks.x[i]))
                                 brick_collison_angle = self.get_angle_pm_left(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
                                 print('1st Brick Collison angle is :' + str(brick_collison_angle))
-                            elif indicator == 2:
+                                print(i)
+                                print(ind_brick)
+                            elif ind_brick == 2:
+                                print(i)
+                                print(ind_brick)
                                 print('2nd Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
                                         str(bricks.y[i]) + " " +str(bricks.x[i]))
                                 brick_collison_angle_2 = self.get_angle_pm_left(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
@@ -948,11 +1017,21 @@ class FuzzyRulesForBricksController:
                         # next_move_crtl_fuzzy.input['collison_brick_ang_2'] = brick_collison_angle_2 + brick_collison_angle
 
                     elif indicator == 0 and ind_brick == 1:
+                        overall_weight = self.weight_snake_pm_left(snake_x,snake_y)
+                        print("Overall Weight is " + str(overall_weight))
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
+                                                            self.rule10,self.rule11,
                                                             self.rule15,self.rule16,self.rule17])
                         next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
                         next_move_crtl_fuzzy.input['food_loc'] = angle
+                        if brick_collison_angle == 0:
+                                print('Snek heading straight on so we depend on our Weight Goddess')
+                                brick_collison_angle = (overall_weight -0) *9
+                        print(brick_collison_angle)
+
+
                         next_move_crtl_fuzzy.input['collison_brick_ang'] = brick_collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
 
                     elif indicator == 0 and ind_brick >= 1:
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
@@ -970,15 +1049,15 @@ class FuzzyRulesForBricksController:
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
 
                     print(str(result)+" is the output score." )
-                    if result >= 0 and result < 35:
+                    if result >= 0 and result < 40:
                         snake.moveUp()
                         print("Move up4")
                         print("################")
-                    if result >=35 and result <=65:
+                    if result >=40 and result <=60:
                         snake.moveLeft()
                         print("Move Left5")
                         print("################")
-                    if result >65 and result <= 100:
+                    if result >60 and result <= 100:
                         snake.moveDown()
                         print("Move Down6")
                         print("################")
@@ -996,6 +1075,26 @@ class FuzzyRulesForBricksController:
                     print("Checking the Bricks Distance")
                     manhatten_distance_brick = self.manhatten_distance_brick(snake_x,snake_y,bricks.x,bricks.y)
                     print(manhatten_distance_brick)
+
+                    for i in range(0, len(manhatten_distance_brick)):
+                        if manhatten_distance_brick[i] == 1:
+                            ind_brick = ind_brick +1
+                            if ind_brick ==1:
+                                print('Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                        str(bricks.y[i]) + " " +str(bricks.x[i]))
+                                brick_collison_angle = self.get_angle_pm_up(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
+                                print('1st Brick Collison angle is :' + str(brick_collison_angle))
+                                print(i)
+                                print(ind_brick)
+                            elif ind_brick == 2:
+                                print(i)
+                                print(ind_brick)
+                                print('2nd Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                        str(bricks.y[i]) + " " +str(bricks.x[i]))
+                                brick_collison_angle_2 = self.get_angle_pm_up(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
+                                print('2nd Brick Collison angle is :' + str(brick_collison_angle_2))
+                            else:
+                                pass
 
                     if len(snake_x) > 4:
                         for i in range(3, len(overall_man_dist)):
@@ -1114,11 +1213,19 @@ class FuzzyRulesForBricksController:
                         # next_move_crtl_fuzzy.input['collison_brick_ang_2'] = brick_collison_angle_2 + brick_collison_angle
 
                     elif indicator == 0 and ind_brick == 1:
+                        overall_weight = self.weight_snake_pm_up(snake_x,snake_y)
+                        print("Overall Weight is " + str(overall_weight))
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
+                                                            self.rule10,self.rule11,
                                                             self.rule15,self.rule16,self.rule17])
                         next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
                         next_move_crtl_fuzzy.input['food_loc'] = angle
+                        if brick_collison_angle == 0:
+                                print('Snek heading straight on so we depend on our Weight Goddess')
+                                brick_collison_angle = (overall_weight -0) *9
+                        print(brick_collison_angle)
                         next_move_crtl_fuzzy.input['collison_brick_ang'] = brick_collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
 
                     elif indicator == 0 and ind_brick >= 1:
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
@@ -1136,15 +1243,15 @@ class FuzzyRulesForBricksController:
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
                     print(str(result)+" is the output score." )
-                    if result >= 0 and result < 35:
+                    if result >= 0 and result <40:
                         snake.moveLeft()
                         print("Move Left7")
                         print("################")
-                    if result >=35 and result <=65:
+                    if result >=40 and result <=60:
                         snake.moveUp()
                         print("Move up8")
                         print("################")
-                    if result >65 and result <= 100:
+                    if result >60 and result <= 100:
                         snake.moveRight()
                         print("Move Right9")
                         print("################")
@@ -1162,6 +1269,26 @@ class FuzzyRulesForBricksController:
                     print("Checking the Bricks Distance")
                     manhatten_distance_brick = self.manhatten_distance_brick(snake_x,snake_y,bricks.x,bricks.y)
                     print(manhatten_distance_brick)
+
+                    for i in range(0, len(manhatten_distance_brick)):
+                        if manhatten_distance_brick[i] == 1:
+                            ind_brick = ind_brick +1
+                            if ind_brick ==1:
+                                print('Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                        str(bricks.y[i]) + " " +str(bricks.x[i]))
+                                brick_collison_angle = self.get_angle_pm_down(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
+                                print('1st Brick Collison angle is :' + str(brick_collison_angle))
+                                print(i)
+                                print(ind_brick)
+                            elif ind_brick == 2:
+                                print(i)
+                                print(ind_brick)
+                                print('2nd Offending Brick part is:' + " " +str(snake.y[0]) + " " +str(snake.x[0]) + " " +
+                                        str(bricks.y[i]) + " " +str(bricks.x[i]))
+                                brick_collison_angle_2 = self.get_angle_pm_down(bricks.y[i], bricks.x[i],snake.y[0], snake.x[0])
+                                print('2nd Brick Collison angle is :' + str(brick_collison_angle_2))
+                            else:
+                                pass
 
                     if len(snake_x) > 4:
                         for i in range(3, len(overall_man_dist)):
@@ -1281,11 +1408,19 @@ class FuzzyRulesForBricksController:
                         # next_move_crtl_fuzzy.input['collison_brick_ang_2'] = brick_collison_angle_2 + brick_collison_angle
 
                     elif indicator == 0 and ind_brick == 1:
+                        overall_weight = self.weight_snake_pm_down(snake_x,snake_y)
+                        print("Overall Weight is " + str(overall_weight))
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
+                                                            self.rule10,self.rule11,
                                                             self.rule15,self.rule16,self.rule17])
                         next_move_crtl_fuzzy = ctrl.ControlSystemSimulation(next_move_crtl)
                         next_move_crtl_fuzzy.input['food_loc'] = angle
+                        if brick_collison_angle == 0:
+                                print('Snek heading straight on so we depend on our Weight Goddess')
+                                brick_collison_angle = (overall_weight -0) *9
+                        print(brick_collison_angle)
                         next_move_crtl_fuzzy.input['collison_brick_ang'] = brick_collison_angle
+                        next_move_crtl_fuzzy.input['weight_snake'] = overall_weight
 
                     elif indicator == 0 and ind_brick >= 1:
                         next_move_crtl = ctrl.ControlSystem([self.rule1, self.rule2, self.rule3,
@@ -1303,15 +1438,15 @@ class FuzzyRulesForBricksController:
                     result = next_move_crtl_fuzzy.compute()
                     result = int(next_move_crtl_fuzzy.output['Next Direction'])
                     print(str(result)+" is the output score." )
-                    if result >= 0 and result < 35:
+                    if result >= 0 and result < 40:
                         snake.moveLeft()
                         print("Move Left10")
                         print("################")
-                    if result >=35 and result <=65:
+                    if result >=40 and result <=60:
                         snake.moveDown()
                         print("Move Down11")
                         print("################")
-                    if result >65 and result <= 100:
+                    if result >60 and result <= 100:
                         snake.moveRight()
                         print("Move Right12")
                         print("################")
