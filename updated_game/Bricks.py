@@ -46,12 +46,11 @@ class Bricks:
 
             # lay the vertical blocks where the horizontal bricks end
             vertical_bricks_x = horizontal_pos
-            for i in range(0, self.bricks_length):
+            for i in range(1, self.bricks_length):
                 self.x.append(vertical_bricks_x)
                 vertical_pos = self.initial_y + (i * self.step)
                 self.y.append(vertical_pos)
                 surface.blit(image,(vertical_bricks_x, vertical_pos))
-
 
 
     def getNumBricks(self):
