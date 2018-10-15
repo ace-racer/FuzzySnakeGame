@@ -31,7 +31,7 @@ class FuzzyRulesController:
         self.next_move_pm_right = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
         self.next_move_pm_right['up'] = fuzz.trapmf(self.next_move_pm_right.universe,[0,0,25, 40])
         self.next_move_pm_right['right'] = fuzz.trimf(self.next_move_pm_right.universe,[25,50,75])
-        self.next_move_pm_right['down'] = fuzz.trapmf(self.next_move_pm_right.universe,[40,75,100,100])
+        self.next_move_pm_right['down'] = fuzz.trapmf(self.next_move_pm_right.universe,[60,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -72,7 +72,7 @@ class FuzzyRulesController:
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_right['up'])
 
         self.spiral_snake = ctrl.Antecedent(np.arange(-91,91,1),'spiral_snake')
-        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,89])
+        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,-89])
         self.spiral_snake['90'] = fuzz.trimf(self.spiral_snake.universe,[89,90,91])
         self.spiral_snake['0'] = fuzz.trimf(self.spiral_snake.universe,[-1,0,1])
 
@@ -87,7 +87,7 @@ class FuzzyRulesController:
         self.next_move_pm_left = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
         self.next_move_pm_left['up'] = fuzz.trapmf(self.next_move_pm_left.universe,[0,0,25, 40])
         self.next_move_pm_left['left'] = fuzz.trimf(self.next_move_pm_left.universe,[25,50,75])
-        self.next_move_pm_left['down'] = fuzz.trapmf(self.next_move_pm_left.universe,[40,75,100,100])
+        self.next_move_pm_left['down'] = fuzz.trapmf(self.next_move_pm_left.universe,[60,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -127,7 +127,7 @@ class FuzzyRulesController:
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_left['down'])
 
         self.spiral_snake = ctrl.Antecedent(np.arange(-91,91,1),'spiral_snake')
-        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,89])
+        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,-89])
         self.spiral_snake['90'] = fuzz.trimf(self.spiral_snake.universe,[89,90,91])
         self.spiral_snake['0'] = fuzz.trimf(self.spiral_snake.universe,[-1,0,1])
 
@@ -142,7 +142,7 @@ class FuzzyRulesController:
         self.next_move_pm_up = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
         self.next_move_pm_up['left'] = fuzz.trapmf(self.next_move_pm_up.universe,[0,0,25, 40])
         self.next_move_pm_up['up'] = fuzz.trimf(self.next_move_pm_up.universe,[25,50,75])
-        self.next_move_pm_up['right'] = fuzz.trapmf(self.next_move_pm_up.universe, [40,75,100,100])
+        self.next_move_pm_up['right'] = fuzz.trapmf(self.next_move_pm_up.universe, [60,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -182,7 +182,7 @@ class FuzzyRulesController:
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_up['left'])
 
         self.spiral_snake = ctrl.Antecedent(np.arange(-91,91,1),'spiral_snake')
-        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,89])
+        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,-89])
         self.spiral_snake['90'] = fuzz.trimf(self.spiral_snake.universe,[89,90,91])
         self.spiral_snake['0'] = fuzz.trimf(self.spiral_snake.universe,[-1,0,1])
 
@@ -196,7 +196,7 @@ class FuzzyRulesController:
         self.next_move_pm_down = ctrl.Consequent(np.arange(0, 101, 1), 'Next Direction')
         self.next_move_pm_down['left'] = fuzz.trapmf(self.next_move_pm_down.universe,[0,0,25, 40])
         self.next_move_pm_down['down'] = fuzz.trimf(self.next_move_pm_down.universe,[25,50,75])
-        self.next_move_pm_down['right'] = fuzz.trapmf(self.next_move_pm_down.universe,[40,75,100,100])
+        self.next_move_pm_down['right'] = fuzz.trapmf(self.next_move_pm_down.universe,[60,75,100,100])
 
         self.food_loc = ctrl.Antecedent(np.arange(-181, 181, 1), 'food_loc')
         '''Based on a clock with respect the the snake head'''
@@ -237,7 +237,7 @@ class FuzzyRulesController:
         self.rule11= ctrl.Rule(self.weight_snake['right'], self.next_move_pm_down['right'])
 
         self.spiral_snake = ctrl.Antecedent(np.arange(-91,91,1),'spiral_snake')
-        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,89])
+        self.spiral_snake['-90'] = fuzz.trimf(self.spiral_snake.universe,[-91,-90,-89])
         self.spiral_snake['90'] = fuzz.trimf(self.spiral_snake.universe,[89,90,91])
         self.spiral_snake['0'] = fuzz.trimf(self.spiral_snake.universe,[-1,0,1])
 
