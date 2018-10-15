@@ -11,11 +11,17 @@ class Bricks:
         self.initial_y = y * self.step
         self.brick_layout_type = brick_layout_type
         if brick_layout_type != 0:
-            self.x = [self.initial_x]
-            self.y = [self.initial_y]
+            self.x = []
+            self.y = []
 
  
     def draw(self, surface, image):
+        
+        # reinitialize the x and y lists representing the bricks for every drawing
+        if self.brick_layout_type != 0:
+            self.x = []
+            self.y = []
+        
         if self.brick_layout_type == 1:
             for i in range(0, self.bricks_length):
                 self.x.append(self.initial_x)
