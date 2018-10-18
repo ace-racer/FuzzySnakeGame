@@ -51,7 +51,6 @@ class App(Logger):
         self._image_surf = pygame.image.load("assets/snake.png").convert()
         self._food_surf = pygame.image.load("assets/food.png").convert()
         self._brick_image = pygame.image.load("assets/brick.png").convert()
-        self._snake_head_image = pygame.image.load("assets/snake_head.png").convert()
 
     def on_event(self, event):
         if event.type == QUIT:
@@ -93,7 +92,7 @@ class App(Logger):
     def on_render(self, game_over=False):
         if not game_over:
             self._display_surf.fill((0,0,0))
-            self.snake.draw(self._display_surf, self._image_surf, self._snake_head_image)
+            self.snake.draw(self._display_surf, self._image_surf)
             self.food.draw(self._display_surf, self._food_surf)
             self.bricks.draw(self._display_surf, self._brick_image)
             self.draw_score(self._display_surf, self.windowWidth - 200, self.windowHeight - 50, self._score)
