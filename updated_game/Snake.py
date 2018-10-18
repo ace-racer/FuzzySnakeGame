@@ -11,7 +11,7 @@ class Snake:
     updateCountMax = 2
     updateCount = 0
 
-    def __init__(self, length, window_height=600, window_width=800):
+    def __init__(self, length, window_height=660, window_width=880):
        self.length = length
        for i in range(0,2000):
            self.x.append(-100)
@@ -58,6 +58,8 @@ class Snake:
                     self.y[0] = self.y[0] + self.step
 
             self.updateCount = 0
+
+
 
 
     def moveRight(self):
