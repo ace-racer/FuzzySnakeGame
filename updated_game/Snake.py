@@ -75,8 +75,9 @@ class Snake:
     def getCurrentDirection(self):
         return self.direction
 
-    def draw(self, surface, image):
-        for i in range(0,self.length):
+    def draw(self, surface, image, head_image):
+        surface.blit(head_image,(self.x[0],self.y[0]))
+        for i in range(1,self.length):
             surface.blit(image,(self.x[i],self.y[i]))
 
     def get_distance_from_wall(self, bricks, direction):
