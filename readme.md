@@ -12,13 +12,17 @@ There are 2 parameters that the Snake game we have developed takes as inputs –
 # Snake levels
 
 0.	No bricks level – When the level is specified as 0 there are no bricks present in the arena and the only way for the snake to die is a self-collision. This is the simplest level for the snake to maneuver.
+![level0](/imgs/level0.png)
  
 1.	Vertical bricks level – When the level is specified as 1 the bricks are laid out in a vertical pattern. If the snake collides with any brick in the brick wall, then it would perish and the game will be over.
+![level1](/imgs/level1.png)
  
 
 2.	Horizontal bricks level – When the level is specified as 2, the bricks are laid out in a horizontal pattern. The difficult of this level is the same as that of the earlier level.
+![level2](/imgs/level2.png)
  
 3.	L shaped bricks level – When the level is specified as 3, the bricks are laid out in an inverted L shaped pattern. This is the most difficult level for the snake to maneuver.
+![level3](/imgs/level3.png)
  
 # Installation of dependencies
 
@@ -37,6 +41,7 @@ There are 2 parameters that the Snake game we have developed takes as inputs –
 * > activate fuzzygame
 * Find the requirements.txt file in the Snake game source code 
 * > pip install -r requirements.txt 
+
 If the installation of the dependencies from the requirements.txt fails due to some reason, please install the packages mentioned in the requirements.txt using pip in the conda environment.
 
 # Sample runs
