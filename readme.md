@@ -1,5 +1,17 @@
 # Overview
 
+Fuzzy logic helps to realize human like decision making in machines. The objective of the application is to use Fuzzy logic to create a smart controller that can control a snake in the classic snake game to get as much score as possible.  
+
+# Introduction
+Snake or Worm was first introduced in 1998 on the Nokia platform. Ever since, there is a surge in the interest in this game. The controls are intuitive, and the gameplay is simple yet addictive. The gameplay consists of the player controlling a snake to eat an item which in turn makes the snake longer. The rules of the game are such that the snake must not collide with its own body and a barrier, typically a wall, if it exists.
+
+In the classic game, the player controls the snake in a bid to eat as many food items as possible to obtain a top score. In this application, we look at using Fuzzy Logic system to infer the next step the snake should make. Rules are used to control snake based on the location of the snake with the position of the food item and proximity to its own body in mind. 
+
+Here, is an image of the snake moving towards the food (Doge) where the multi colored pixel in the head of the snake.
+![snake_food.png](/imgs/snake_food.png)
+
+# Parameters to the game application
+
 There are 2 parameters that the Snake game we have developed takes as inputs – the type of controller that is used to control the snake and the layout of obstacles that the snake needs to maneuver in the game arena. These parameters are described in detail below. We then describe the steps to install the dependencies requires to execute the application and then finally how to run after installing the dependencies.
 
 # Snake controllers
