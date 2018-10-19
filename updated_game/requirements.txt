@@ -1,3 +1,6 @@
+numpy==1.15.2
+matplotlib
 pygame
 scikit-fuzzy
-numpy
+
+
